@@ -8,6 +8,10 @@ while Power_Button: # Запуск терминала
         In_Flow = 'Main_Flow' # Название потока в котором находимся
         Custom_Command = custom_input.cusinput() # Создаем командную строку от пользователя
         if Custom_Command: # Проверка команды на []
-            list_of_cases.read_input(Custom_Command, In_Flow) # Функция исполняющие пользовательские команды
+            if Custom_Command[0] == 'exit':
+                Main_Flow = False
+                Power_Button = False
+            else:
+                list_of_cases.read_input(Custom_Command, In_Flow) # Функция исполняющие пользовательские команды
         else: # Сохранение пропуска, если нету команды
             continue # Далее

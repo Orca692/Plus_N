@@ -8,12 +8,13 @@ while Power_Button: # Запуск терминала
         In_Flow = 'Main_Flow' # Название потока в котором находимся
         Custom_Command = custom_input.cusinput() # Создаем командную строку от пользователя
         if Custom_Command: # Проверка команды на []
-            if Custom_Command[0] == 'exit': # Выполнение команды exit
-                Main_Flow = False # Выход из главного потока
-                Power_Button = False # Выход из программы
-                Custom_Command[0] = 'clear' # Выполнение команды clear()
-                list_of_cases.read_input(Custom_Command, In_Flow) # Очистка консоли
-            else:
-                list_of_cases.read_input(Custom_Command, In_Flow) # Функция исполняющие пользовательские команды
+            Power_Status = list_of_cases.read_input(Custom_Command, In_Flow) # Функция исполняющие пользовательские команды
+            match Power_Status: # Power_Status нужен для выполнения операций, которые находятся во вне потоков
+                case 'exit': # Выйти из программы
+                    Power_Button = False # Выход из программы
+                    Main_Flow = False # Выход из главного потока
+                case _: # Если неизвестный индекс
+                    continue # Продолжить --> Сделать сообщение об ошибке, потому что сюда прога не
+                    # должна заходить естественным путем
         else: # Сохранение пропуска, если нету команды
             continue # Далее
